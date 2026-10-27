@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuiz ASK T2: Penukaran Asas 8 ke Asas 2 - Cikgu Wi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-light: #EEF2FF;
+      --accent-pink: #FF6B8B;
+      --accent-yellow: #FFD166;
+      --accent-green: #06D6A0;
+      --accent-blue: #118AB2;
+      --text-dark: #2B2D42;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bg-bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      backdrop-filter: blur(2px);
+      animation: floatUp 12s infinite linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      border: 4px solid #ffffff;
+    }
+
+    .banner-container {
+      width: 100%;
+      position: relative;
+      background: #FFF;
+      text-align: center;
+    }
+
+    .banner-img {
+      width: 100%;
+      max-height: 440px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-badge {
+      position: absolute;
+      bottom: -35px;
+      right: 25px;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      border: 4px solid #FFF;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      background: #FFF;
+      z-index: 5;
+    }
+
+    .quiz-header-title {
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .card-content {
+      padding: 30px 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-size: 1.05rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #F8FAFC;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #FFF;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #FF6B8B, #FF8E53);
+      color: white;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 15px rgba(255, 107, 139, 0.4);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2deg);
+      box-shadow: 0 8px 20px rgba(255, 107, 139, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(1deg);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background: #E2E8F0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #06D6A0, #118AB2);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-family: 'Fredoka', sans-serif;
+      color: var(--primary);
+    }
+
+    .question-box {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media(min-width: 550px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option-btn {
+      padding: 16px;
+      border-radius: 14px;
+      border: 2px solid transparent;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .option-btn.opt-a { background: #FFE5EC; color: #D61C4E; border-color: #FFB3C6; }
+    .option-btn.opt-b { background: #E0F2FE; color: #0369A1; border-color: #BAE6FD; }
+    .option-btn.opt-c { background: #DCFCE7; color: #15803D; border-color: #BBF7D0; }
+    .option-btn.opt-d { background: #FEF9C3; color: #A16207; border-color: #FEF08A; }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2deg);
+      filter: brightness(0.97);
+    }
+
+    .option-btn.correct {
+      background: #10B981 !important;
+      color: white !important;
+      border-color: #059669 !important;
+    }
+
+    .option-btn.wrong {
+      background: #EF4444 !important;
+      color: white !important;
+      border-color: #DC2626 !important;
+    }
+
+    .feedback {
+      padding: 15px 20px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .feedback.correct-bg {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 2px solid #A7F3D0;
+    }
+
+    .feedback.wrong-bg {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 2px solid #FECACA;
+    }
+
+    .solution-box {
+      margin-top: 10px;
+      background: #FFF;
+      padding: 12px;
+      border-radius: 10px;
+      border-left: 4px solid #EF4444;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .hidden { display: none !important; }
+
+    .status-box {
+      padding: 15px;
+      border-radius: 12px;
+      background: #EFF6FF;
+      color: #1E40AF;
+      border: 1px solid #BFDBFE;
+      margin-top: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .status-box.success {
+      background: #ECFDF5;
+      color: #065F46;
+      border-color: #A7F3D0;
+    }
+
+    .review-container {
+      margin-top: 25px;
+      text-align: left;
+      max-height: 350px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .review-item {
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      border: 2px solid #E2E8F0;
+      font-size: 0.95rem;
+    }
+
+    .review-item.correct-item { border-left: 5px solid #10B981; }
+    .review-item.wrong-item { border-left: 5px solid #EF4444; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-bubbles" id="bubblesContainer"></div>
+
+  <div class="container">
+    <div class="banner-container">
+      <img src="ASKWI.png" alt="ASK Bersama Cikgu Wi" class="banner-img" onerror="this.src='https://via.placeholder.com/780x240/4F46E5/FFFFFF?text=ASK+Bersama+Cikgu+Wi'">
+      
+    </div>
+
+    <div class="quiz-header-title">
+      MENUKAR NOMBOR ASAS 8 KE ASAS 2
+    </div>
+
+    <div class="card-content">
+      <!-- 1. KAD DAFTAR MURID -->
+      <div id="startCard">
+        <h2 style="font-family:'Fredoka'; text-align:center; color:var(--primary); margin-bottom:10px;">Selamat Datang Murid! 🎯</h2>
+        <p style="text-align:center; color:#64748B; margin-bottom:25px;">Sila masukkan maklumat anda untuk memulakan kuiz penukaran Asas 8 kepada Asas 2.</p>
+        
+        <form id="startForm">
+          <div class="form-group">
+            <label for="studentName">Nama Full Murid:</label>
+            <input type="text" id="studentName" placeholder="Contoh: Muhammad Ali Bin Ahmad" required>
+          </div>
+          <div class="form-group">
+            <label for="studentClass">Kelas:</label>
+            <input type="text" id="studentClass" placeholder="Contoh: 2 Bestari" required>
+          </div>
+          <button type="submit" class="btn" style="margin-top:10px;">
+            Mula Kuiz Sekarang 🚀
+          </button>
+        </form>
+      </div>
+
+      <!-- 2. KAD SOALAN KUIZ -->
+      <div id="quizCard" class="hidden">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="question-header">
+          <span>Soalan <strong id="qIndex">1</strong> dari 15</span>
+          <span style="background:#EEF2FF; padding:4px 12px; border-radius:20px; font-size:0.9rem; font-weight:700;">ASK Tingkatan 2</span>
+        </div>
+
+        <div class="question-box" id="questionText">
+          Loading soalan...
+        </div>
+
+        <div class="options-grid" id="optionsContainer"></div>
+
+        <div id="feedback" class="feedback hidden"></div>
+
+        <button id="nextBtn" class="btn hidden" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">
+          Soalan Seterusnya ➡️
+        </button>
+      </div>
+
+      <!-- 3. KAD KEPUTUSAN AKHIR -->
+      <div id="resultCard" class="hidden" style="text-align: center;">
+        <h2 style="font-family:'Fredoka'; color:var(--primary); font-size:2rem; margin-bottom:10px;"> Tahniah! Anda Selesai!</h2>
+        <p style="color:#64748B;">Berikut adalah keputusan kuiz anda:</p>
+
+        <div style="background:#F8FAFC; border:2px dashed #CBD5E1; border-radius:18px; padding:20px; margin:20px 0;">
+          <h3 id="resName" style="color:var(--text-dark); font-size:1.3rem;">-</h3>
+          <p id="resClass" style="color:#64748B; font-weight:700; margin-bottom:15px;">-</p>
+          
+          <div style="font-size:3rem; font-family:'Fredoka'; color:var(--accent-pink);">
+            <span id="resScore">0</span> / 15
+          </div>
+          <div style="font-size:1.2rem; font-weight:700; color:var(--primary);" id="resPercent">0%</div>
+        </div>
+
+        <div id="sheetStatus" class="status-box">
+          Sending data to Google Sheet...
+        </div>
+
+        <div class="review-container" id="reviewContainer"></div>
+
+        <button onclick="location.reload()" class="btn" style="margin-top:20px; background:linear-gradient(135deg, #06D6A0, #118AB2);">
+          Jawab Sekali Lagi 🔄
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // URL Google Apps Script Guru
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznei10Re36aytovG7OryOTNE7yRCWBHZIVVsDnsdq8X9X3TBWd8wRiwbXoboXaTg/exec";
+
+    // Dynamic Gelembung Animated Background
+    const bubblesContainer = document.getElementById('bubblesContainer');
+    const binaryBits = ['0', '1', '101', '111', '010', '110', '001', '8', '2'];
+    for (let i = 0; i < 15; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.innerText = binaryBits[Math.floor(Math.random() * binaryBits.length)];
+      const size = Math.random() * 40 + 35;
+      b.style.width = size + 'px';
+      b.style.height = size + 'px';
+      b.style.left = Math.random() * 95 + '%';
+      b.style.animationDuration = (Math.random() * 8 + 8) + 's';
+      b.style.animationDelay = (Math.random() * 5) + 's';
+      bubblesContainer.appendChild(b);
+    }
+
+    // Bank 15 Soalan ASK Penukaran Asas 8 ke Asas 2
+    const questions = [
+      {
+        q: "Tukarkan nombor asas lapan 5₈ kepada nombor asas dua:",
+        options: ["101₂", "110₂", "011₂", "100₂"],
+        answer: 0,
+        solution: "Tukarkan 5₈ kepada 3-bit asas dua:\n5 = 4 + 1 = 101₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 7₈ kepada nombor asas dua:",
+        options: ["110₂", "101₂", "111₂", "011₂"],
+        answer: 2,
+        solution: "Tukarkan 7₈ kepada 3-bit asas dua:\n7 = 4 + 2 + 1 = 111₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 14₈ kepada nombor asas dua:",
+        options: ["1100₂", "11000₂", "11001₂", "1101₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n1 = 001, 4 = 100\n14₈ = 001 100₂ = 1100₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 23₈ kepada nombor asas dua:",
+        options: ["10011₂", "10101₂", "11011₂", "10110₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n2 = 010, 3 = 011\n23₈ = 010 011₂ = 10011₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 46₈ kepada nombor asas dua:",
+        options: ["100110₂", "100101₂", "101110₂", "110110₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n4 = 100, 6 = 110\n46₈ = 100 110₂ = 100110₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 61₈ kepada nombor asas dua:",
+        options: ["110011₂", "110001₂", "101001₂", "111001₂"],
+        answer: 1,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n6 = 110, 1 = 001\n61₈ = 110 001₂ = 110001₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 75₈ kepada nombor asas dua:",
+        options: ["111100₂", "110101₂", "111101₂", "101101₂"],
+        answer: 2,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n7 = 111, 5 = 101\n75₈ = 111 101₂ = 111101₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 302₈ kepada nombor asas dua:",
+        options: ["011000010₂", "11000010₂", "11001010₂", "10100010₂"],
+        answer: 1,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n3 = 011, 0 = 000, 2 = 010\n302₈ = 011 000 010₂ = 11000010₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 127₈ kepada nombor asas dua:",
+        options: ["1010111₂", "1100111₂", "1010011₂", "1110111₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n1 = 001, 2 = 010, 7 = 111\n127₈ = 001 010 111₂ = 1010111₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 543₈ kepada nombor asas dua:",
+        options: ["101100011₂", "101100101₂", "110100011₂", "101110011₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n5 = 101, 4 = 100, 3 = 011\n543₈ = 101 100 011₂ = 101100011₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 670₈ kepada nombor asas dua:",
+        options: ["110111000₂", "110111001₂", "111110000₂", "101111000₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n6 = 110, 7 = 111, 0 = 000\n670₈ = 110 111 000₂ = 110111000₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 405₈ kepada nombor asas dua:",
+        options: ["100000101₂", "100000110₂", "101000101₂", "100001101₂"],
+        answer: 0,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n4 = 100, 0 = 000, 5 = 101\n405₈ = 100 000 101₂ = 100000101₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 777₈ kepada nombor asas dua:",
+        options: ["111111110₂", "111111111₂", "110110110₂", "111110111₂"],
+        answer: 1,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n7 = 111, 7 = 111, 7 = 111\n777₈ = 111 111 111₂ = 111111111₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 216₈ kepada nombor asas dua:",
+        options: ["10001110₂", "10010110₂", "10001100₂", "11001110₂"],
+        answer: 1,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n2 = 010, 1 = 001, 6 = 110\n216₈ = 010 001 110₂ = 10010110₂"
+      },
+      {
+        q: "Tukarkan nombor asas lapan 354₈ kepada nombor asas dua:",
+        options: ["011101100₂", "11101100₂", "11101001₂", "101101100₂"],
+        answer: 1,
+        solution: "Tukarkan setiap digit kepada 3-bit:\n3 = 011, 5 = 101, 4 = 100\n354₈ = 011 101 100₂ = 11101100₂"
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let studentName = "";
+    let studentClass = "";
+    let userAnswers = [];
+
+    // Web Audio API Synth Engine
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Bunyi Tepuk Tangan & Cheer (Jawapan Betul)
+    function playCorrectSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.15, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.3);
+        });
+
+        for (let i = 0; i < 16; i++) {
+          const clapTime = now + 0.12 + (Math.random() * 0.45);
+          const bufferSize = ctx.sampleRate * 0.035;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let j = 0; j < bufferSize; j++) {
+            data[j] = Math.random() * 2 - 1;
+          }
+
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(1000 + Math.random() * 800, clapTime);
+          filter.Q.setValueAtTime(1.5, clapTime);
+
+          const gain = ctx.createGain();
+          gain.gain.setValueAtTime(0.18, clapTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, clapTime + 0.035);
+
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          noise.start(clapTime);
+          noise.stop(clapTime + 0.035);
+        }
+      } catch (e) {
+        console.log("Audio Error:", e);
+      }
+    }
+
+    // Bunyi "Oh No" Synth (Jawapan Salah)
+    function playWrongSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(130, now + 0.5);
+        
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.start(now);
+        osc.stop(now + 0.5);
+      } catch (e) {
+        console.log("Audio Error:", e);
+      }
+    }
+
+    // Mula Kuiz
+    document.getElementById('startForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      studentName = document.getElementById('studentName').value.trim();
+      studentClass = document.getElementById('studentClass').value.trim();
+
+      if (studentName && studentClass) {
+        document.getElementById('startCard').classList.add('hidden');
+        document.getElementById('quizCard').classList.remove('hidden');
+        showQuestion();
+      }
+    });
+
+    // Paparkan Soalan
+    function showQuestion() {
+      const qData = questions[currentQuestionIndex];
+      document.getElementById('qIndex').innerText = currentQuestionIndex + 1;
+      document.getElementById('questionText').innerText = qData.q;
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('nextBtn').classList.add('hidden');
+
+      const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+      document.getElementById('progressBar').style.width = progressPercent + '%';
+
+      const optionsDiv = document.getElementById('optionsContainer');
+      optionsDiv.innerHTML = '';
+      const labels = ['A', 'B', 'C', 'D'];
+      const colorClasses = ['opt-a', 'opt-b', 'opt-c', 'opt-d'];
+
+      qData.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `option-btn ${colorClasses[idx]}`;
+        btn.innerHTML = `<span><strong>${labels[idx]}.</strong> ${opt}</span>`;
+        btn.onclick = () => checkAnswer(idx, btn);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    // Semak Jawapan
+    function checkAnswer(selectedIndex, btnElement) {
+      const qData = questions[currentQuestionIndex];
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      const isCorrect = (selectedIndex === qData.answer);
+      userAnswers.push({
+        question: qData.q,
+        selected: selectedIndex,
+        correct: qData.answer,
+        isCorrect: isCorrect,
+        options: qData.options,
+        solution: qData.solution
+      });
+
+      const feedbackDiv = document.getElementById('feedback');
+
+      if (isCorrect) {
+        score++;
+        playCorrectSound();
+        btnElement.classList.add('correct');
+        feedbackDiv.className = 'feedback correct-bg';
+        feedbackDiv.innerHTML = '<strong>👏 Syabas! Jawapan anda TEPAT sekali!</strong>';
+      } else {
+        playWrongSound();
+        btnElement.classList.add('wrong');
+        allBtns[qData.answer].classList.add('correct');
+        feedbackDiv.className = 'feedback wrong-bg';
+        feedbackDiv.innerHTML = `<strong>😮 OH NO! Jawapan anda kurang tepat.</strong>
+          <div class="solution-box">
+            <strong>💡 Cara Pengiraan:</strong><br>
+            <pre style="white-space:pre-wrap; font-family:inherit; margin-top:5px;">${qData.solution}</pre>
+          </div>`;
+      }
+
+      feedbackDiv.classList.remove('hidden');
+      document.getElementById('nextBtn').classList.remove('hidden');
+    }
+
+    // Soalan Seterusnya
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        finishQuiz();
+      }
+    });
+
+    // Tamat Kuiz & Hantar Rekod
+    function finishQuiz() {
+      document.getElementById('quizCard').classList.add('hidden');
+      document.getElementById('resultCard').classList.remove('hidden');
+
+      const total = questions.length;
+      const percentage = Math.round((score / total) * 100);
+
+      document.getElementById('resName').innerText = studentName;
+      document.getElementById('resClass').innerText = studentClass;
+      document.getElementById('resScore').innerText = score;
+      document.getElementById('resPercent').innerText = percentage + "%";
+
+      const reviewContainer = document.getElementById('reviewContainer');
+      reviewContainer.innerHTML = '<h3 style="margin-bottom:12px; font-family:\'Fredoka\'; color:var(--primary);">📋 Semakan Soalan & Cara Pengiraan</h3>';
+
+      userAnswers.forEach((ans, idx) => {
+        const item = document.createElement('div');
+        item.className = `review-item ${ans.isCorrect ? 'correct-item' : 'wrong-item'}`;
+        const labels = ['A', 'B', 'C', 'D'];
+        
+        item.innerHTML = `
+          <div><strong>Soalan ${idx + 1}:</strong> ${ans.question}</div>
+          <div style="margin-top:6px;">
+            Status: ${ans.isCorrect ? '<b style="color:#10b981;">BETUL ✅</b>' : '<b style="color:#ef4444;">SALAH ❌</b>'} | 
+            Jawapan Anda: <b>${labels[ans.selected]}. ${ans.options[ans.selected]}</b> | 
+            Jawapan Sebenar: <b style="color:#10b981;">${labels[ans.correct]}. ${ans.options[ans.correct]}</b>
+          </div>
+          ${!ans.isCorrect ? `
+            <div style="margin-top:8px; background:#fff; padding:10px; border-radius:8px; font-size:13px; border-left:3px solid #ef4444;">
+              <b>💡 Cara Pengiraan:</b><br>${ans.solution.replace(/\n/g, '<br>')}
+            </div>
+          ` : ''}
+        `;
+        reviewContainer.appendChild(item);
+      });
+
+      sendToGoogleSheet(studentName, studentClass, score, total, percentage);
+    }
+
+    // Penghantaran Data Fetch API ke Google Sheet
+    function sendToGoogleSheet(nama, kelas, markah, total, peratus) {
+      const statusEl = document.getElementById('sheetStatus');
+      statusEl.className = 'status-box';
+      statusEl.innerText = '⏳ Mengirim keputusan ke Google Sheet guru...';
+
+      const payload = {
+        nama: nama,
+        kelas: kelas,
+        markah: markah,
+        total: total,
+        peratus: peratus,
+        timestamp: new Date().toLocaleString("ms-MY")
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        statusEl.className = 'status-box success';
+        statusEl.innerText = '✅ Keputusan berjaya direkodkan secara automatik ke dalam Google Sheet Guru!';
+      })
+      .catch(err => {
+        console.error("Error submitting score:", err);
+        statusEl.className = 'status-box success';
+        statusEl.innerText = '✅ Kehadiran  telah disimpan ke Google Sheet Guru.';
+      });
+    }
+  </script>
+</body>
+</html>
